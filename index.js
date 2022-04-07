@@ -1,11 +1,34 @@
 const express =require('express');
-const PORT = 5000;
-
 const app = express();
+const PORT = 5000;
+const mongoose = require('mongoose');
+const {MONGOURI} = require('./keys');
 
-app.get('/',(req,res)=>{
-    res.send('hello world');
+
+
+//setting up mongodb connection
+mongoose.connect(MONGOURI,{
+    useNewUrlParser:true,
+    useUnifiedTopology:true
+});
+mongoose.connection.on('connected',()=>{
+    console.log('connected to mongodb');
 })
+mongoose.connection.on('error',(err)=>{
+    console.log('error in database',err);
+})
+
+//requiring schema
+require('./models/user');
+require('./models/post');
+
+//parsing data to json
+app.use(express.json());
+
+app.use(require('./routes/auth'));
+app.use(require('./routes/post'));
+
+
 
 app.listen(PORT,()=>{
     console.log("server id running on ", PORT);
