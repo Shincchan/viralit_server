@@ -8,7 +8,7 @@ const {JWT_SECRET} = require('../keys');
 
 
 router.post('/signup',  async (req,res)=>{
-    const {name,email,password } = req.body;
+    const {name,email,password,pic } = req.body;
     try {
         if(!email || !password || !name){
             return res.status(422).json({error : "please enter all the fields"})
@@ -27,7 +27,8 @@ router.post('/signup',  async (req,res)=>{
             user = new User({
                  email :email,
                  password:hashedPassword,
-                 name:name
+                 name:name,
+                 pic
      
              })
              await user.save();
@@ -61,9 +62,9 @@ router.post('/signin',async (req,res)=>{
               } else {
 
                 const token = jwt.sign({_id:user._id},JWT_SECRET);
-                const {_id,name,email} = user;
+                const {_id,name,email,followers,followings,pic} = user;
 
-                res.status(200).json({token,user:{_id,name,email}});
+                res.status(200).json({token,user:{_id,name,email,followers,followings,pic}});
               }
         }
 
