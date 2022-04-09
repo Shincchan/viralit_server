@@ -30,7 +30,7 @@ export default function Navbar() {
                 </li>,
                 <li key={100}>
                     <Link to="/myfollowingspost">
-                        Fllowings
+                        Followings
                     </Link>
                 </li>,
                 <button key={8} className="btn waves-effect waves-light" type="submit" name="action" style={{

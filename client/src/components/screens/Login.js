@@ -56,7 +56,7 @@ export default function Login() {
                     <i className="material-icons right">send</i>
                 </button>
                 <h5>
-                    <Link to="/signup" style={{color:"black"}}>Don't have an account</Link>
+                    <Link to="/signup" style={{color:"black"}}>Don't have an account ? signUP first</Link>
                 </h5>
                 <small>Created by:-UDIT</small>
 

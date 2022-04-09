@@ -119,7 +119,7 @@ export default function Signup() {
                     <i className="material-icons right">send</i>
                 </button>
                 <h5>
-                    <Link to="/login" style={{ color: "black" }}>Already have an account ?</Link>
+                    <Link to="/login" style={{ color: "black" }}>Already have an account ? then login.</Link>
                 </h5>
 
             </div>
