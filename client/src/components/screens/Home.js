@@ -166,7 +166,7 @@ const deleteComment=  (postId,commentId)=>{
         return (
           <div className="card home-card"  key={item._id}>
             <div style={{display:"flex", alignItems:"center"}}>
-              <div style={{height:"50px",width:"50px",borderRadius:"50%"}}><img style={{height:"100%" ,width:"100%"}} src={item.postedBy.pic} alt="" /></div>
+              <div style={{height:"50px",width:"50px",borderRadius:"50%"}}><img style={{height:"100%" ,width:"100%",borderRadius:"50%"}} src={item.postedBy.pic} alt="" /></div>
               
             <h5 style={{flex:"7", padding:"10px"}}><Link style={{color:"black"}} to={item.postedBy._id!==state._id?"/profile/"+item.postedBy._id : "/profile"}>{item.postedBy.name}</Link></h5>
             <span><small>{format(item.createdAt)}</small></span>

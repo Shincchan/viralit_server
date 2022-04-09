@@ -58,6 +58,7 @@ export default function Login() {
                 <h5>
                     <Link to="/signup" style={{color:"black"}}>Don't have an account</Link>
                 </h5>
+                <small>Created by:-UDIT</small>
 
 
             </form>
