@@ -10,7 +10,6 @@ router.post('/createpost',requireLogin,(req,res)=>{
     if(!title || !body ||!pic){
         return res.status(422).json({error: "please enter all the fields"});
     }
-    
     req.user.password = undefined;
     const post = new Post({
         title,
@@ -30,7 +29,8 @@ router.post('/createpost',requireLogin,(req,res)=>{
 router.get('/allpost',requireLogin,(req,res)=>{
     Post.find()
     .populate('postedBy',"_id name pic")
-    .populate("comments.postedBy","_id name") //getting only id and name
+    .populate("comments.postedBy","_id name")//getting only id and name
+    .sort('-createdAt') //sorting in descending order
     .then(posts=>{
         res.json({posts});
     })
@@ -43,6 +43,7 @@ router.get('/allpost',requireLogin,(req,res)=>{
 router.get('/mypost',requireLogin,(req,res)=>{
     Post.find({postedBy:req.user._id})
     .populate("postedBy","_id name pic")
+    .sort('-createdAt')
     .then(myPost=>{
         res.json({myPost})
     })
@@ -56,7 +57,8 @@ router.get('/mypost',requireLogin,(req,res)=>{
 router.get('/followingpost',requireLogin,(req,res)=>{
     Post.find({postedBy:{$in:req.user.followings}})
     .populate("postedBy","_id name pic")
-    .populate("comments.postedBy","_id name") 
+    .populate("comments.postedBy","_id name")
+    .sort('-createdAt') 
     .then(posts=>{
         res.json({posts})
     })
@@ -103,7 +105,6 @@ router.put('/unlike',requireLogin,(req,res)=>{
         }
     })
 })
-
 //comment on a post
 router.put('/comment',requireLogin,(req,res)=>{
 
@@ -128,7 +129,6 @@ router.put('/comment',requireLogin,(req,res)=>{
         }
     })
 })
-
 //deleting a post
 router.delete('/deletepost/:postId',requireLogin,(req,res)=>{
     Post.findOne({_id:req.params.postId})
@@ -149,7 +149,6 @@ router.delete('/deletepost/:postId',requireLogin,(req,res)=>{
         }
     })
 })
-
 //deleting a comment
 router.delete('/deletecomment/:postId/:commentId',requireLogin,(req,res)=>{
     
@@ -200,7 +199,4 @@ router.delete('/deletecomment/:postId/:commentId',requireLogin,(req,res)=>{
 })
     
 })
-
-
-
 module.exports = router;
