@@ -64,14 +64,7 @@ export default function CreatePost() {
         M.toast({ html: "only image can be added", classes: "#c62828 red darken-3" })
 
       })
-
-
-
-
   }
-
-
-
   return (
     <>
    

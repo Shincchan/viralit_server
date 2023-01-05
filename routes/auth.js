@@ -6,9 +6,8 @@ const bcrypt =require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const {JWT_SECRET} = require('../config/keys');
 
-
 router.post('/signup',  async (req,res)=>{
-    const {name,email,password,pic } = req.body;
+    const {name,email,password,pic} = req.body;
     try {
         if(!email || !password || !name){
             return res.status(422).json({error : "please enter all the fields"})
@@ -22,8 +21,7 @@ router.post('/signup',  async (req,res)=>{
             //generating salt
             const salt = await bcrypt.genSalt(10);
             //generating hashedPassword
-            const hashedPassword = await bcrypt.hash(req.body.password, salt); 
-            
+            const hashedPassword = await bcrypt.hash(req.body.password, salt);
             user = new User({
                  email :email,
                  password:hashedPassword,

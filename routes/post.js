@@ -10,7 +10,6 @@ router.post('/createpost',requireLogin,(req,res)=>{
     if(!title || !body ||!pic){
         return res.status(422).json({error: "please enter all the fields"});
     }
-    
     req.user.password = undefined;
     const post = new Post({
         title,
@@ -106,7 +105,6 @@ router.put('/unlike',requireLogin,(req,res)=>{
         }
     })
 })
-
 //comment on a post
 router.put('/comment',requireLogin,(req,res)=>{
 
@@ -131,7 +129,6 @@ router.put('/comment',requireLogin,(req,res)=>{
         }
     })
 })
-
 //deleting a post
 router.delete('/deletepost/:postId',requireLogin,(req,res)=>{
     Post.findOne({_id:req.params.postId})
@@ -152,7 +149,6 @@ router.delete('/deletepost/:postId',requireLogin,(req,res)=>{
         }
     })
 })
-
 //deleting a comment
 router.delete('/deletecomment/:postId/:commentId',requireLogin,(req,res)=>{
     
@@ -203,7 +199,4 @@ router.delete('/deletecomment/:postId/:commentId',requireLogin,(req,res)=>{
 })
     
 })
-
-
-
 module.exports = router;

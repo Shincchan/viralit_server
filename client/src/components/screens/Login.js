@@ -6,10 +6,7 @@ export default function Login() {
     const {state,dispatch} = useContext(UserContext);
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
-   
-
     const navigate = useNavigate();
-
     const postData = ()=>{
         fetch("/signin",{
             method:"post",
